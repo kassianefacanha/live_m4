@@ -11,7 +11,52 @@ const aluno = (app)=>{
         bd.aluno.push(NovoAluno);
         res.send({ "NovoAluno": NovoAluno });
     })
+    //rota passando paramentro
+    app.get('/aluno/:email', (req, res) => {
+    const email = req.params.email
+      for(let i = 0; i <= bd.aluno.length; i++ ){//percorrendo meu array meu banco
+        if(bd.aluno[i].email == email ){// comparando o parametro q recebo com todos os email q estão no banco
+          res.send(bd.aluno[i])//enviando o resultado da comparação
+        }
+      }
+    })
+    app.put('/aluno/:nome', (req, res) => {
+        const nome = req.params.nome
+        const body = req.body
+        for(let i = 0; i <= bd.aluno.length; i++ ){
+          if(bd.aluno[i].nome == nome ){
+            const DadoAntigo = bd.aluno[i];
+            const DadoNovoAluno = new Aluno(
+            body.nome || DadoAntigo.nome,
+            body.email|| DadoAntigo.email,
+            body.senha|| DadoAntigo.senha
+            )
+            bd.aluno.splice(i,1,DadoNovoAluno)
+            res.json({"Aluno Alterado": DadoNovoAluno,
+             "DadosAntigos:": DadoAntigo})
+            
+        }
+    }
+        })
+
+    app.delete('/aluno/:nome', (req, res) => {
+        // achar no banco o que a dado q é igual ao parametro passado
+        // se achou deletar do array  envia q deletou
+        // se n achou n encontrou 
+      const nome = req.params.nome;
+      const alunoIndex = bd.aluno.findIndex(aluno=> aluno.nome == nome )
+
+      if(alunoIndex > -1){
+        const alunoDeletado = bd.aluno.splice(alunoIndex,1)
+        res.json({"alunodeletado": alunoDeletado,
+                    "indexAluno": alunoIndex})
+      }else{
+        res.json("Aluno não encontrado")
+      }
+    })
+
 }
+
 
 module.exports = aluno; //exportando a função
 

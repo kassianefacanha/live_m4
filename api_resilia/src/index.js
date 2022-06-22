@@ -1,13 +1,16 @@
 // import express from 'express';
 const express = require('express');
 const app = express();
+
 //middelwares
 app.use(express.json());
 
 // ENTIDADES:  aluno, facilitador, empregabilidade, parceiros
 const aluno = require('./controllers/aluno-controller'); // importar a função aluno
-aluno(app); //chamei a função passando app
 const facilitador = require('./controllers/facilitador-controller'); // importar a função aluno
+
+
+aluno(app); //chamei a função passando app
 facilitador(app); //chamei a função passando app
 
 
@@ -24,3 +27,4 @@ facilitador(app); //chamei a função passando app
 app.listen(3333,()=>{
     console.log("RODANDO SERVIDOR NA PORTA 3333");
 })
+

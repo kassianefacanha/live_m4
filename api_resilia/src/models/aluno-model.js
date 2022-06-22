@@ -18,3 +18,4 @@ class Aluno {
 
 
 module.exports = Aluno;
+// export {Aluno}
