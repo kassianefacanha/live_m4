@@ -1,7 +1,7 @@
 // import express from 'express';
 const express = require('express');
 const app = express();
-
+const bdSQLite = require('./infra/sqlite-db')
 //middelwares
 app.use(express.json());
 
@@ -10,7 +10,7 @@ const aluno = require('./controllers/aluno-controller'); // importar a função 
 const facilitador = require('./controllers/facilitador-controller'); // importar a função aluno
 
 
-aluno(app); //chamei a função passando app
+aluno(app, bdSQLite); //chamei a função passando app
 facilitador(app); //chamei a função passando app
 
 

@@ -1,15 +1,28 @@
-const bd = require('../infra/bd');
+// const bd = require('../infra/bd');
 const Aluno  = require('../models/aluno-model');
+const bdSQLite = require('../infra/sqlite-db')
+const AlunoDao = require('../DAO/aluno_dao')
+
+const aluno = (app) =>{
+  // instanciando o objeto de acesso aos dados
+ const DadosDAO = new AlunoDao(bdSQLite)
 
 
-const aluno = (app)=>{
     app.get('/aluno', (req, res) => {
-        res.send({"MEUBANDOALUNO:": bd.aluno});
+        // res.send({"MEUBANDOALUNO:": bd.aluno});
+        DadosDAO.listarAluno()
+        .then((resultado) => {
+          res.json(resultado)})
+        .catch((err) => {res.send(err)})
+      
+
     })
     app.post('/aluno', (req, res) => {
         const NovoAluno = new Aluno(req.body.nome, req.body.email, req.body.senha);
-        bd.aluno.push(NovoAluno);
-        res.send({ "NovoAluno": NovoAluno });
+        // bd.aluno.push(NovoAluno);
+        // res.send({ "NovoAluno": NovoAluno });
+
+
     })
     //rota passando paramentro
     app.get('/aluno/:email', (req, res) => {
