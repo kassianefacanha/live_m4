@@ -4,16 +4,10 @@ class Aluno {
         this.id = id++;
         this.nome = nome;
         this.email = email;
-        this.senha = this.validarSenha(senha);
+        this.senha = senha;
     }
 
-    validarSenha(senha){
-        if(senha.length <= 5){
-            return senha
-        }else{
-            throw new Error("SENHA DEVE TER MENOS QUE 5 CARACTERES")
-        }
-    }
+    
 }
 
 
