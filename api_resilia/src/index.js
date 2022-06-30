@@ -2,7 +2,9 @@
 const express = require('express');
 const app = express();
 const bdSQLite = require('./infra/sqlite-db')
+const cors = require('cors')
 //middelwares
+app.use(cors())
 app.use(express.json());
 
 // ENTIDADES:  aluno, facilitador, empregabilidade, parceiros

@@ -11,7 +11,7 @@ const aluno = (app) =>{
     app.get('/aluno', (req, res) => {
         DadosDAO.listarAluno()
         .then((resultado) => {
-          res.json(resultado)})
+          res.status(200).json(resultado)})
         .catch((err) => {res.send(err)})
       
 
@@ -21,7 +21,7 @@ const aluno = (app) =>{
       const NovoUsuario = new Aluno(body.nome, body.email, body.senha)
       DadosDAO.insereUsuario(NovoUsuario)
       .then((result) => {
-        res.send("inserido com sucesso");
+        res.status(201).send("inserido com sucesso");
       }).catch((err) => {
           res.send(err);
         })     

@@ -31,10 +31,8 @@ class AlunoDao {
         [novoUsuario.nome, novoUsuario.email, novoUsuario.senha],
         (error) => {
           if (error) {
-            console.log('reject');
             reject('Usuário não pôde ser inserido')
           } else {
-            console.log('resolve');
             resolve('Usuário inserido com sucesso')
           }
         })
@@ -42,7 +40,8 @@ class AlunoDao {
   }
   alterarUsuario(UsuarioAtualizado) {
     return new Promise((resolve, reject) => {
-      this.bd.run('UPDATE USUARIOS SET NOME = ?, EMAIL = ?, SENHA = ? WHERE id = ?', UsuarioAtualizado, (erro) => {
+      this.bd.run('UPDATE USUARIOS SET NOME = ?, EMAIL = ?, SENHA = ? WHERE id = ?',
+       UsuarioAtualizado, (erro) => {
         if (erro) reject('Não foi possível atualizar o usuário');
         else resolve('Usuário atualizado');
       });
