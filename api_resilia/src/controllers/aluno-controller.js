@@ -8,12 +8,13 @@ const aluno = (app) =>{
  const DadosDAO = new AlunoDao(bdSQLite)
 
 
-    app.get('/aluno', (req, res) => {
-        DadosDAO.listarAluno()
-        .then((resultado) => {
-          res.status(200).json(resultado)})
-        .catch((err) => {res.send(err)})
-      
+    app.get('/aluno', async (req, res) => { 
+        try{
+          const aluno = await DadosDAO.listarAluno()
+          res.status(200).json(aluno)
+        }catch(error){
+          res.status(404).json(error)
+        }
 
     })
     app.post('/aluno',(req, res) => {
